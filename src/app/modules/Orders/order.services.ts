@@ -9,7 +9,7 @@ const createOrderDB = async (cartItemIds: string[], totalPrice: number, user: an
    
     const existOrder = await Order.findOne({ cartItemIds });
     if (existOrder) {
-        throw new AppError(httpStatus.BAD_REQUEST, "Order already created.");
+        throw new AppError(httpStatus.CONFLICT, "Order already created.");
     }
 
    
