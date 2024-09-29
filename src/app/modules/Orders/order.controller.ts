@@ -1,9 +1,11 @@
 import catchAsync from "../../utils/catchAsync"
+import { OrderService } from "./order.services";
 
 
 const createOrder= catchAsync(async(req,res)=>{
     const { cartItemIds, totalPrice, user } = req.body;
-    console.log(cartItemIds, totalPrice, user);
+   
+    const result = await OrderService.createOrderDB(cartItemIds, totalPrice, user)
 })
 
 

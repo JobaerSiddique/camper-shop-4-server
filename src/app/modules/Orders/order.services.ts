@@ -1,7 +1,7 @@
 
 
 
-const createOrderDB = async()=>{
+const createOrderDB = async(cartItemIds:string, totalPrice:number, user:string)=>{
 
 }
 
