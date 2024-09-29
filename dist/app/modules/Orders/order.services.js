@@ -22,7 +22,7 @@ const product_model_1 = require("../products/product.model");
 const createOrderDB = (cartItemIds, totalPrice, user) => __awaiter(void 0, void 0, void 0, function* () {
     const existOrder = yield order_model_1.Order.findOne({ cartItemIds });
     if (existOrder) {
-        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Order already created.");
+        throw new AppError_1.default(http_status_1.default.CONFLICT, "Order already created.");
     }
     const cartItems = yield cart_model_1.Cart.find({ _id: { $in: cartItemIds } }).populate('product');
     if (!cartItems || cartItems.length === 0) {
