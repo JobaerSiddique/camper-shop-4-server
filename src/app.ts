@@ -4,9 +4,9 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import router from './app/routes'
 import globalErrorHandler from './app/middlewares/globalHandlerError'
-
+const oring=["https://darling-gelato-f0a8a9.netlify.app","http://localhost:5000/"]
 app.use(cors({
-  origin:"https://darling-gelato-f0a8a9.netlify.app",
+  origin:oring,
   credentials: true
 }))
 app.use(express.json())

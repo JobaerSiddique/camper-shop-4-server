@@ -9,8 +9,9 @@ const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const routes_1 = __importDefault(require("./app/routes"));
 const globalHandlerError_1 = __importDefault(require("./app/middlewares/globalHandlerError"));
+const oring = ["https://darling-gelato-f0a8a9.netlify.app", "http://localhost:5000/"];
 app.use((0, cors_1.default)({
-    origin: "https://darling-gelato-f0a8a9.netlify.app",
+    origin: oring,
     credentials: true
 }));
 app.use(express_1.default.json());
