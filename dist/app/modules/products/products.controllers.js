@@ -49,6 +49,7 @@ const getSingleProduct = (0, catchAsync_1.default)((req, res) => __awaiter(void 
 const updateProduct = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const productId = req.params.id;
     const updated = req.body;
+    console.log({ updated });
     const result = yield products_services_1.productService.updateProductDB(productId, updated);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,

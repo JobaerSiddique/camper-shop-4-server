@@ -8,10 +8,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.productService = void 0;
+const http_status_1 = __importDefault(require("http-status"));
+const AppError_1 = __importDefault(require("../Error/AppError"));
 const product_model_1 = require("./product.model");
 const createProductIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, category } = payload;
+    const existingProduct = yield product_model_1.Product.findOne({ name, category });
+    if (existingProduct) {
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, `Product with the name "${name}" in the "${category}" category already exists.`);
+    }
     const result = yield product_model_1.Product.create(payload);
     return result;
 });
@@ -51,10 +61,10 @@ const getSingleProductDB = (id) => __awaiter(void 0, void 0, void 0, function* (
 const updateProductDB = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
     const productId = yield product_model_1.Product.findById(id);
     if (!productId) {
-        throw new Error("Product Not Found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Product Not Found");
     }
     if (productId.isDeleted) {
-        throw new Error("Product already Deleted");
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Product already Deleted");
     }
     const updateProduct = yield product_model_1.Product.findByIdAndUpdate(id, payload, { new: true });
     return updateProduct;

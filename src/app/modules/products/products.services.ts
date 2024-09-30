@@ -1,13 +1,26 @@
+import httpStatus from "http-status"
+import AppError from "../Error/AppError"
 import  {Product} from "./product.model"
 
 
 
 
 
-const createProductIntoDB = async(payload:string)=>{
-    const result = await Product.create(payload)
-    return result
-}
+const createProductIntoDB = async (payload: any) => {
+  const { name, category } = payload;
+
+  
+  const existingProduct = await Product.findOne({ name, category });
+
+  if (existingProduct) {
+   
+    throw new AppError(httpStatus.BAD_REQUEST,`Product with the name "${name}" in the "${category}" category already exists.`);
+  }
+
+  
+  const result = await Product.create(payload);
+  return result;
+};
 
 
 const getAllProduct = async(payload: any)=>{
@@ -49,11 +62,11 @@ const getSingleProductDB = async(id:string)=>{
 const updateProductDB = async (id:string,payload:any)=>{
   const productId = await Product.findById(id)
   if(!productId){
-    throw new Error("Product Not Found")
+    throw new AppError(httpStatus.NOT_FOUND,"Product Not Found")
   }
 
   if(productId.isDeleted){
-    throw new Error("Product already Deleted")
+    throw new AppError(httpStatus.BAD_REQUEST,"Product already Deleted")
   }
 
   const updateProduct = await Product.findByIdAndUpdate(id,payload,{new:true})

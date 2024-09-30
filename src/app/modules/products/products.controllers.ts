@@ -47,6 +47,7 @@ const getSingleProduct = catchAsync(async(req,res)=>{
 const updateProduct = catchAsync(async(req,res)=>{
     const productId = req.params.id;
     const updated = req.body;
+    console.log({updated});
     const result = await productService.updateProductDB(productId,updated)
     sendResponse(res,{
         statusCode:httpStatus.OK,
