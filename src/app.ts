@@ -6,7 +6,7 @@ import router from './app/routes'
 import globalErrorHandler from './app/middlewares/globalHandlerError'
 
 app.use(cors({
-  origin:"http://localhost:5173",
+  origin:"https://darling-gelato-f0a8a9.netlify.app",
   credentials: true
 }))
 app.use(express.json())
