@@ -4,7 +4,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import router from './app/routes'
 import globalErrorHandler from './app/middlewares/globalHandlerError'
-const oring=["https://darling-gelato-f0a8a9.netlify.app","http://localhost:5173"]
+const oring=["https://camper-shop-44.netlify.app","http://localhost:5173"]
 app.use(cors({
   origin:oring,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
