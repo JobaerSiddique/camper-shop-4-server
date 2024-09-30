@@ -7,7 +7,9 @@ import globalErrorHandler from './app/middlewares/globalHandlerError'
 const oring=["https://darling-gelato-f0a8a9.netlify.app","http://localhost:5000"]
 app.use(cors({
   origin:oring,
-  credentials: true
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true 
 }))
 app.use(express.json())
 app.use(cookieParser())

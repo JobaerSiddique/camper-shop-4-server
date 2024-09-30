@@ -12,6 +12,8 @@ const globalHandlerError_1 = __importDefault(require("./app/middlewares/globalHa
 const oring = ["https://darling-gelato-f0a8a9.netlify.app", "http://localhost:5000"];
 app.use((0, cors_1.default)({
     origin: oring,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }));
 app.use(express_1.default.json());
